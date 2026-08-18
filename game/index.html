@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>CYBER STRIKE - 飞机大战</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div id="game-container">
+    <canvas id="game-canvas"></canvas>
+    
+    <div id="hud" class="hidden">
+      <div class="hud-top">
+        <div class="hud-left">
+          <div class="score-display">
+            <span class="label">SCORE</span>
+            <span id="score-value">0</span>
+          </div>
+          <div class="combo-display" id="combo-display">
+            <span class="combo-multiplier">x1</span>
+            <span class="combo-label">COMBO</span>
+          </div>
+        </div>
+        <div class="hud-right">
+          <div class="health-bar">
+            <div class="health-label">HP</div>
+            <div class="health-bar-container">
+              <div class="health-bar-fill" id="health-fill"></div>
+            </div>
+          </div>
+          <div class="shield-indicator" id="shield-indicator">
+            <span class="shield-icon">◇</span>
+            <span>SHIELD</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="boss-bar-container hidden" id="boss-bar-container">
+        <div class="boss-name" id="boss-name">BOSS</div>
+        <div class="boss-hp-bar">
+          <div class="boss-hp-fill" id="boss-hp-fill"></div>
+        </div>
+      </div>
+      
+      <div class="hud-bottom">
+        <div class="weapon-display">
+          <span class="weapon-icon" id="weapon-icon">⚡</span>
+          <span class="weapon-name" id="weapon-name">LASER</span>
+          <span class="weapon-level" id="weapon-level">LV.1</span>
+        </div>
+        <div class="skill-container">
+          <div class="skill-bar-container">
+            <div class="skill-bar-fill" id="skill-fill"></div>
+            <span class="skill-label">ULTIMATE</span>
+          </div>
+          <span class="skill-key">[SPACE]</span>
+        </div>
+        <div class="pause-btn" id="pause-btn">⏸</div>
+      </div>
+    </div>
+    
+    <div id="main-menu" class="menu-screen">
+      <div class="menu-content">
+        <h1 class="game-title">
+          <span class="title-cyber">CYBER</span>
+          <span class="title-strike">STRIKE</span>
+        </h1>
+        <p class="game-subtitle">VERTICAL SHOOTING</p>
+        
+        <div class="menu-buttons">
+          <button class="cyber-btn primary" data-mode="story">
+            <span class="btn-text">STORY MODE</span>
+            <span class="btn-sub">闯关模式</span>
+          </button>
+          <button class="cyber-btn" data-mode="endless">
+            <span class="btn-text">ENDLESS</span>
+            <span class="btn-sub">无尽模式</span>
+          </button>
+          <button class="cyber-btn" data-mode="bullet">
+            <span class="btn-text">BULLET HELL</span>
+            <span class="btn-sub">弹幕挑战</span>
+          </button>
+          <button class="cyber-btn secondary" id="settings-btn">
+            <span class="btn-text">SETTINGS</span>
+            <span class="btn-sub">设置</span>
+          </button>
+        </div>
+        
+        <div class="high-score-display">
+          <span class="hs-label">HIGH SCORE</span>
+          <span class="hs-value" id="high-score">0</span>
+        </div>
+      </div>
+      
+      <div class="scanlines"></div>
+      <div class="grid-bg"></div>
+    </div>
+    
+    <div id="level-select" class="menu-screen hidden">
+      <div class="menu-content">
+        <h2 class="menu-title">SELECT LEVEL</h2>
+        <div class="level-grid" id="level-grid"></div>
+        <button class="cyber-btn back-btn" id="back-to-menu">← BACK</button>
+      </div>
+    </div>
+    
+    <div id="pause-menu" class="menu-screen hidden">
+      <div class="menu-content pause-content">
+        <h2 class="menu-title">PAUSED</h2>
+        <div class="menu-buttons">
+          <button class="cyber-btn primary" id="resume-btn">
+            <span class="btn-text">RESUME</span>
+            <span class="btn-sub">继续游戏</span>
+          </button>
+          <button class="cyber-btn" id="restart-btn">
+            <span class="btn-text">RESTART</span>
+            <span class="btn-sub">重新开始</span>
+          </button>
+          <button class="cyber-btn secondary" id="quit-btn">
+            <span class="btn-text">QUIT</span>
+            <span class="btn-sub">返回主菜单</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div id="game-over" class="menu-screen hidden">
+      <div class="menu-content">
+        <h2 class="menu-title gameover-title">GAME OVER</h2>
+        <div class="result-stats">
+          <div class="stat-item">
+            <span class="stat-label">FINAL SCORE</span>
+            <span class="stat-value" id="final-score">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">HIGH SCORE</span>
+            <span class="stat-value" id="final-high-score">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">KILLS</span>
+            <span class="stat-value" id="final-kills">0</span>
+          </div>
+        </div>
+        <div class="menu-buttons">
+          <button class="cyber-btn primary" id="retry-btn">
+            <span class="btn-text">RETRY</span>
+            <span class="btn-sub">再来一次</span>
+          </button>
+          <button class="cyber-btn secondary" id="gameover-menu-btn">
+            <span class="btn-text">MENU</span>
+            <span class="btn-sub">返回菜单</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div id="victory" class="menu-screen hidden">
+      <div class="menu-content">
+        <h2 class="menu-title victory-title">VICTORY!</h2>
+        <div class="stars-display" id="stars-display">
+          <span class="star">★</span>
+          <span class="star">★</span>
+          <span class="star">★</span>
+        </div>
+        <div class="result-stats">
+          <div class="stat-item">
+            <span class="stat-label">SCORE</span>
+            <span class="stat-value" id="victory-score">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">TIME</span>
+            <span class="stat-value" id="victory-time">00:00</span>
+          </div>
+        </div>
+        <div class="menu-buttons">
+          <button class="cyber-btn primary" id="next-level-btn">
+            <span class="btn-text">NEXT LEVEL</span>
+            <span class="btn-sub">下一关</span>
+          </button>
+          <button class="cyber-btn secondary" id="victory-menu-btn">
+            <span class="btn-text">MENU</span>
+            <span class="btn-sub">返回菜单</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    
+    <div id="settings-panel" class="menu-screen hidden">
+      <div class="menu-content">
+        <h2 class="menu-title">SETTINGS</h2>
+        <div class="settings-list">
+          <div class="setting-item">
+            <span class="setting-label">BGM VOLUME</span>
+            <div class="slider-container">
+              <input type="range" id="bgm-volume" min="0" max="100" value="50">
+              <span class="slider-value" id="bgm-volume-value">50%</span>
+            </div>
+          </div>
+          <div class="setting-item">
+            <span class="setting-label">SFX VOLUME</span>
+            <div class="slider-container">
+              <input type="range" id="sfx-volume" min="0" max="100" value="70">
+              <span class="slider-value" id="sfx-volume-value">70%</span>
+            </div>
+          </div>
+          <div class="setting-item">
+            <span class="setting-label">DIFFICULTY</span>
+            <div class="difficulty-btns">
+              <button class="diff-btn active" data-diff="easy">EASY</button>
+              <button class="diff-btn" data-diff="normal">NORMAL</button>
+              <button class="diff-btn" data-diff="hard">HARD</button>
+            </div>
+          </div>
+          <div class="setting-item">
+            <span class="setting-label">SCREEN SHAKE</span>
+            <div class="toggle-switch" id="shake-toggle">
+              <div class="toggle-knob"></div>
+            </div>
+          </div>
+        </div>
+        <button class="cyber-btn back-btn" id="settings-back">← BACK</button>
+      </div>
+    </div>
+    
+    <div id="boss-warning" class="boss-warning hidden">
+      <div class="warning-text">WARNING</div>
+      <div class="warning-sub">INCOMING BOSS</div>
+    </div>
+  </div>
+  
+  <script src="js/core/Utils.js"></script>
+  <script src="js/core/Input.js"></script>
+  <script src="js/core/Game.js"></script>
+  <script src="js/entities/Particle.js"></script>
+  <script src="js/entities/Bullet.js"></script>
+  <script src="js/entities/PowerUp.js"></script>
+  <script src="js/entities/Player.js"></script>
+  <script src="js/entities/Enemy.js"></script>
+  <script src="js/entities/Boss.js"></script>
+  <script src="js/systems/ParticleSystem.js"></script>
+  <script src="js/systems/CollisionSystem.js"></script>
+  <script src="js/systems/WeaponSystem.js"></script>
+  <script src="js/systems/AudioSystem.js"></script>
+  <script src="js/systems/UISystem.js"></script>
+  <script src="js/data/weapons.js"></script>
+  <script src="js/data/enemies.js"></script>
+  <script src="js/data/bosses.js"></script>
+  <script src="js/data/levels.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
