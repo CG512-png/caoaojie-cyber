@@ -8,15 +8,15 @@
 /* ---------- 设计令牌覆盖 ---------- */
 :root{
   --bg:#080810;
-  --purple:#00f3ff;            /* 原淡紫 → 赛博青蓝 */
-  --gold:#ff0055;              /* 原黄昏金 → 赛博洋红 */
-  --green:#00ff66;             /* 赛博荧光绿 */
-  --card:rgba(15,23,42,.55);
-  --card-hover:rgba(15,23,42,.82);
-  --border:rgba(0,243,255,.16);
-  --ink-soft:#8fa3c8;
+  --purple:#a855f7;            /* 回归原版紫 → 赛博霓虹紫 */
+  --gold:#ff2d95;              /* 赛博霓虹粉（辅助对比色） */
+  --green:#fbbf24;             /* 回归原版黄昏金（点缀） */
+  --card:rgba(26,18,42,.55);
+  --card-hover:rgba(26,18,42,.82);
+  --border:rgba(168,85,247,.16);
+  --ink-soft:#a394c4;
 }
-html{scrollbar-color:rgba(0,243,255,.35) #080810}
+html{scrollbar-color:rgba(168,85,247,.35) #080810}
 body{background:#080810}
 
 /* ---------- 星空粒子 Canvas（最底层装饰） ---------- */
@@ -27,9 +27,9 @@ body{background:#080810}
 .cyber-grid{
   position:fixed;inset:0;z-index:0;pointer-events:none;
   background:
-    linear-gradient(rgba(0,243,255,.055) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(0,243,255,.055) 1px,transparent 1px),
-    linear-gradient(115deg,transparent 46%,rgba(255,0,85,.035) 46.5%,rgba(255,0,85,.035) 53.5%,transparent 54%);
+    linear-gradient(rgba(168,85,247,.055) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(168,85,247,.055) 1px,transparent 1px),
+    linear-gradient(115deg,transparent 46%,rgba(255,45,149,.035) 46.5%,rgba(255,45,149,.035) 53.5%,transparent 54%);
   background-size:44px 44px,44px 44px,100% 100%;
   -webkit-mask-image:radial-gradient(ellipse at 50% 26%,#000 28%,transparent 80%);
           mask-image:radial-gradient(ellipse at 50% 26%,#000 28%,transparent 80%);
@@ -49,7 +49,7 @@ body{background:#080810}
 .cyber-watermark{
   position:fixed;left:22px;bottom:16px;z-index:2;pointer-events:none;
   font-family:'Fira Code','Courier New',monospace;font-size:11px;letter-spacing:2px;
-  color:rgba(0,243,255,.30);text-shadow:0 0 8px rgba(0,243,255,.35);
+  color:rgba(168,85,247,.30);text-shadow:0 0 8px rgba(168,85,247,.35);
   white-space:nowrap;
 }
 
@@ -58,64 +58,64 @@ body{background:#080810}
   position:fixed;top:92px;right:20px;z-index:9990;
   width:44px;height:44px;border-radius:12px;padding:0;
   background:rgba(8,8,16,.62);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
-  border:1px solid rgba(0,243,255,.4);color:#00f3ff;cursor:pointer;
+  border:1px solid rgba(168,85,247,.4);color:#a855f7;cursor:pointer;
   display:flex;align-items:center;justify-content:center;
   transition:box-shadow .3s,border-color .3s,color .3s;
 }
 .cyber-audio-btn svg{width:20px;height:20px}
-.cyber-audio-btn:hover{border-color:#00ff66;color:#00ff66;box-shadow:0 0 18px rgba(0,255,102,.35)}
-.cyber-audio-btn.on{border-color:#00ff66;color:#00ff66;box-shadow:0 0 16px rgba(0,255,102,.45)}
+.cyber-audio-btn:hover{border-color:#fbbf24;color:#fbbf24;box-shadow:0 0 18px rgba(251,191,36,.35)}
+.cyber-audio-btn.on{border-color:#fbbf24;color:#fbbf24;box-shadow:0 0 16px rgba(251,191,36,.45)}
 .cyber-audio-pulse{
   position:absolute;inset:-5px;border-radius:16px;pointer-events:none;
-  border:1px solid rgba(0,243,255,.45);opacity:0;
+  border:1px solid rgba(168,85,247,.45);opacity:0;
 }
-.cyber-audio-btn.on .cyber-audio-pulse{animation:audioPulse 2.2s ease-out infinite;border-color:rgba(0,255,102,.55)}
+.cyber-audio-btn.on .cyber-audio-pulse{animation:audioPulse 2.2s ease-out infinite;border-color:rgba(251,191,36,.55)}
 @keyframes audioPulse{0%{transform:scale(.85);opacity:.9}70%{transform:scale(1.35);opacity:0}100%{transform:scale(1.35);opacity:0}}
 
 /* ---------- 赛博终端打字机 ---------- */
 .cyber-typewriter{
   display:flex;align-items:center;gap:10px;margin:4px 0 14px;min-height:32px;
   font-family:'Fira Code','Share Tech Mono','Courier New',monospace;
-  font-size:clamp(15px,1.9vw,20px);color:#00ff66;
-  text-shadow:0 0 8px rgba(0,255,102,.65),0 0 22px rgba(0,255,102,.28);
+  font-size:clamp(15px,1.9vw,20px);color:#fbbf24;
+  text-shadow:0 0 8px rgba(251,191,36,.65),0 0 22px rgba(251,191,36,.28);
   letter-spacing:.02em;
 }
-.cyber-type-prompt{color:#00f3ff;text-shadow:0 0 8px rgba(0,243,255,.75);font-weight:700;user-select:none}
+.cyber-type-prompt{color:#a855f7;text-shadow:0 0 8px rgba(168,85,247,.75);font-weight:700;user-select:none}
 .cyber-type-text{word-break:break-all}
-.cyber-type-cursor{animation:cyberBlink .85s steps(1) infinite;color:#00ff66;font-weight:700;user-select:none}
+.cyber-type-cursor{animation:cyberBlink .85s steps(1) infinite;color:#fbbf24;font-weight:700;user-select:none}
 @keyframes cyberBlink{0%,49%{opacity:1}50%,100%{opacity:0}}
 
 /* ---------- Glitch 故障字效（hover 触发） ---------- */
 .glitch{position:relative;display:inline-block}
 .glitch::before,.glitch::after{content:attr(data-text);position:absolute;inset:0;pointer-events:none;opacity:0}
-.glitch:hover::before,.glitch:focus::before{opacity:1;animation:glitchA .45s steps(2) infinite;color:#00f3ff;clip-path:inset(10% 0 55% 0);transform:translate(-2px,-1px)}
-.glitch:hover::after,.glitch:focus::after{opacity:1;animation:glitchB .45s steps(2) infinite;color:#ff0055;clip-path:inset(62% 0 4% 0);transform:translate(2px,1px)}
+.glitch:hover::before,.glitch:focus::before{opacity:1;animation:glitchA .45s steps(2) infinite;color:#a855f7;clip-path:inset(10% 0 55% 0);transform:translate(-2px,-1px)}
+.glitch:hover::after,.glitch:focus::after{opacity:1;animation:glitchB .45s steps(2) infinite;color:#ff2d95;clip-path:inset(62% 0 4% 0);transform:translate(2px,1px)}
 @keyframes glitchA{0%{clip-path:inset(10% 0 55% 0)}50%{clip-path:inset(42% 0 18% 0)}100%{clip-path:inset(10% 0 55% 0)}}
 @keyframes glitchB{0%{clip-path:inset(62% 0 4% 0)}50%{clip-path:inset(18% 0 46% 0)}100%{clip-path:inset(62% 0 4% 0)}}
 
 /* ---------- 板块标题霓虹发光 ---------- */
 .section-title{
-  text-shadow:0 0 10px rgba(0,243,255,.5),0 0 30px rgba(0,243,255,.16),0 0 60px rgba(0,243,255,.08);
+  text-shadow:0 0 10px rgba(168,85,247,.5),0 0 30px rgba(168,85,247,.16),0 0 60px rgba(168,85,247,.08);
 }
-.section-title .sub{color:#7dd3fc}
+.section-title .sub{color:#c4b5fd}
 
 /* ---------- Hero 区霓虹强化 ---------- */
 .hero-name{
-  text-shadow:0 0 50px rgba(0,243,255,.35),0 0 100px rgba(0,243,255,.16),0 0 160px rgba(255,0,85,.12);
+  text-shadow:0 0 50px rgba(168,85,247,.35),0 0 100px rgba(168,85,247,.16),0 0 160px rgba(255,45,149,.12);
 }
 .hero-tag{
-  border-color:rgba(0,243,255,.28)!important;
-  color:#a5f3fc!important;
-  text-shadow:0 0 8px rgba(0,243,255,.4);
+  border-color:rgba(168,85,247,.28)!important;
+  color:#d8b4fe!important;
+  text-shadow:0 0 8px rgba(168,85,247,.4);
 }
 .hero-cta{
-  background:linear-gradient(120deg,#00f3ff,#00ff66)!important;
-  box-shadow:0 10px 34px rgba(0,243,255,.35),0 0 24px rgba(0,243,255,.22)!important;
+  background:linear-gradient(120deg,#a855f7,#fbbf24)!important;
+  box-shadow:0 10px 34px rgba(168,85,247,.35),0 0 24px rgba(168,85,247,.22)!important;
 }
 .hero-cta:hover{
-  box-shadow:0 14px 44px rgba(0,243,255,.5),0 0 34px rgba(0,243,255,.35)!important;
+  box-shadow:0 14px 44px rgba(168,85,247,.5),0 0 34px rgba(168,85,247,.35)!important;
 }
-.hero-major svg{stroke:#00ff66!important}
+.hero-major svg{stroke:#fbbf24!important}
 
 /* ---------- 卡片 → 赛博玻璃 + 切角 ---------- */
 .ai-card,
@@ -125,96 +125,96 @@ body{background:#080810}
 .edu-story,
 .radar-canvas-wrap,
 .cat-frame{
-  background:rgba(15,23,42,.58)!important;
+  background:rgba(26,18,42,.58)!important;
   backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;
-  border:1px solid rgba(0,243,255,.22)!important;
-  box-shadow:0 20px 60px rgba(0,0,0,.45),inset 0 0 44px rgba(0,243,255,.03),0 0 22px rgba(0,243,255,.06)!important;
+  border:1px solid rgba(168,85,247,.22)!important;
+  box-shadow:0 20px 60px rgba(0,0,0,.45),inset 0 0 44px rgba(168,85,247,.03),0 0 22px rgba(168,85,247,.06)!important;
   clip-path:polygon(
     20px 0,calc(100% - 20px) 0,100% 20px,
     100% calc(100% - 20px),calc(100% - 20px) 100%,20px 100%,
     0 calc(100% - 20px),0 20px
   );
 }
-/* 卡片 hover：上浮 + 青蓝光晕呼吸 */
+/* 卡片 hover：上浮 + 霓虹紫光晕呼吸 */
 .ai-card:hover,
 .work-music:hover,
 .work-game:hover,
 .cert-card:hover{
   transform:translateY(-6px)!important;
-  border-color:rgba(0,243,255,.55)!important;
-  box-shadow:0 28px 70px rgba(0,0,0,.5),0 0 30px rgba(0,243,255,.28),0 0 60px rgba(0,243,255,.1)!important;
+  border-color:rgba(168,85,247,.55)!important;
+  box-shadow:0 28px 70px rgba(0,0,0,.5),0 0 30px rgba(168,85,247,.28),0 0 60px rgba(168,85,247,.1)!important;
 }
 .work-game{
-  background:linear-gradient(135deg,#0a0a14 0%,#101b33 60%,#150a20 100%)!important;
+  background:linear-gradient(135deg,#0d0a16 0%,#17102b 60%,#1c0f22 100%)!important;
 }
 /* 四角 L 型标尺线（由 script.js 注入 .cyber-corners 元素绘制） */
 .cyber-corners{position:absolute;inset:0;pointer-events:none;z-index:5;border-radius:inherit}
 .cyber-corners::before,.cyber-corners::after{
-  content:"";position:absolute;width:16px;height:16px;border:2px solid #00f3ff;opacity:.85;
-  filter:drop-shadow(0 0 6px rgba(0,243,255,.8));
+  content:"";position:absolute;width:16px;height:16px;border:2px solid #a855f7;opacity:.85;
+  filter:drop-shadow(0 0 6px rgba(168,85,247,.8));
 }
 .cyber-corners::before{top:8px;left:8px;border-right:none;border-bottom:none}
 .cyber-corners::after{bottom:8px;right:8px;border-left:none;border-top:none}
 
 /* ---------- 求学时间线 → 霓虹轨道 ---------- */
 .timeline-line-fill{
-  background:linear-gradient(180deg,#00f3ff,#00ff66)!important;
-  box-shadow:0 0 12px rgba(0,243,255,.7),0 0 32px rgba(0,243,255,.3)!important;
+  background:linear-gradient(180deg,#a855f7,#fbbf24)!important;
+  box-shadow:0 0 12px rgba(168,85,247,.7),0 0 32px rgba(168,85,247,.3)!important;
 }
 .tl-comet{
-  box-shadow:0 0 14px rgba(0,255,102,.9),0 0 34px rgba(0,255,102,.4)!important;
-  background:#00ff66!important;
+  box-shadow:0 0 14px rgba(251,191,36,.9),0 0 34px rgba(251,191,36,.4)!important;
+  background:#fbbf24!important;
 }
 .tl-dot{
-  border-color:#00f3ff!important;
-  box-shadow:0 0 10px rgba(0,243,255,.75),0 0 24px rgba(0,243,255,.3)!important;
+  border-color:#a855f7!important;
+  box-shadow:0 0 10px rgba(168,85,247,.75),0 0 24px rgba(168,85,247,.3)!important;
   background:#080810!important;
 }
-.tl-node.active .tl-dot{background:#00f3ff!important;box-shadow:0 0 14px rgba(0,243,255,.9),0 0 36px rgba(0,243,255,.4)!important}
+.tl-node.active .tl-dot{background:#a855f7!important;box-shadow:0 0 14px rgba(168,85,247,.9),0 0 36px rgba(168,85,247,.4)!important}
 .tl-card{
-  background:rgba(15,23,42,.6)!important;
+  background:rgba(26,18,42,.6)!important;
   backdrop-filter:blur(12px)!important;-webkit-backdrop-filter:blur(12px)!important;
-  border:1px solid rgba(0,243,255,.18)!important;
+  border:1px solid rgba(168,85,247,.18)!important;
 }
 .tl-icon{
-  background:rgba(0,243,255,.1)!important;
-  color:#00f3ff!important;
-  box-shadow:0 0 12px rgba(0,243,255,.25)!important;
+  background:rgba(168,85,247,.1)!important;
+  color:#a855f7!important;
+  box-shadow:0 0 12px rgba(168,85,247,.25)!important;
 }
 
 /* ---------- 雷达 → 霓虹发光 ---------- */
 .radar-canvas-wrap{
-  box-shadow:0 0 34px rgba(0,243,255,.12),inset 0 0 40px rgba(0,243,255,.04)!important;
+  box-shadow:0 0 34px rgba(168,85,247,.12),inset 0 0 40px rgba(168,85,247,.04)!important;
 }
 .radar-legend-item{
-  background:rgba(15,23,42,.55)!important;
-  border:1px solid rgba(0,243,255,.14)!important;
+  background:rgba(26,18,42,.55)!important;
+  border:1px solid rgba(168,85,247,.14)!important;
   backdrop-filter:blur(10px)!important;-webkit-backdrop-filter:blur(10px)!important;
 }
-.radar-legend-fill{background:linear-gradient(90deg,#00f3ff,#00ff66)!important;box-shadow:0 0 8px rgba(0,243,255,.5)!important}
+.radar-legend-fill{background:linear-gradient(90deg,#a855f7,#fbbf24)!important;box-shadow:0 0 8px rgba(168,85,247,.5)!important}
 
 /* ---------- AI 卡片霓虹呼吸边框 ---------- */
 .ai-card::before{
-  background:linear-gradient(140deg,#00f3ff,#00ff66 45%,#ff0055 100%)!important;
-  filter:drop-shadow(0 0 14px rgba(0,243,255,.45))!important;
+  background:linear-gradient(140deg,#a855f7,#fbbf24 45%,#ff2d95 100%)!important;
+  filter:drop-shadow(0 0 14px rgba(168,85,247,.45))!important;
 }
-.work-music .now-title{color:#e0f2fe}
-.edu-story strong{background:linear-gradient(90deg,rgba(0,243,255,.18),transparent)}
-.edu-quote-mark,.edu-story-final{color:#e0f2fe}
+.work-music .now-title{color:#ede9fe}
+.edu-story strong{background:linear-gradient(90deg,rgba(168,85,247,.18),transparent)}
+.edu-quote-mark,.edu-story-final{color:#ede9fe}
 
 /* ---------- 导航霓虹下划线 ---------- */
-.nav-links a:hover{color:#00ff66!important;text-shadow:0 0 10px rgba(0,255,102,.6)}
-.nav-links a::after{background:linear-gradient(90deg,#00ff66,#00f3ff)!important}
-#nav{background:rgba(8,8,16,.7)!important;border-bottom-color:rgba(0,243,255,.12)!important}
+.nav-links a:hover{color:#fbbf24!important;text-shadow:0 0 10px rgba(251,191,36,.6)}
+.nav-links a::after{background:linear-gradient(90deg,#fbbf24,#a855f7)!important}
+#nav{background:rgba(8,8,16,.7)!important;border-bottom-color:rgba(168,85,247,.12)!important}
 
-/* ---------- 入场动画微调（暗紫→赛博青） ---------- */
-.intro-name,.intro-enter-text{color:#e0f2fe}
-.intro-loading-fill{background:linear-gradient(90deg,#00f3ff,#00ff66)!important;box-shadow:0 0 12px rgba(0,243,255,.7)!important}
+/* ---------- 入场动画微调（暗紫→霓虹紫金） ---------- */
+.intro-name,.intro-enter-text{color:#ede9fe}
+.intro-loading-fill{background:linear-gradient(90deg,#a855f7,#fbbf24)!important;box-shadow:0 0 12px rgba(168,85,247,.7)!important}
 
 /* ---------- 全屏播放器 / 浮动条霓虹 ---------- */
-.float-bar{border-color:rgba(0,243,255,.25)!important;box-shadow:0 -6px 30px rgba(0,0,0,.5),0 0 22px rgba(0,243,255,.12)!important}
-.vinyl-disc{box-shadow:0 0 26px rgba(0,243,255,.2)!important}
-.bgm-btn.on{box-shadow:0 0 14px rgba(0,255,102,.5)!important;border-color:#00ff66!important;color:#00ff66!important}
+.float-bar{border-color:rgba(168,85,247,.25)!important;box-shadow:0 -6px 30px rgba(0,0,0,.5),0 0 22px rgba(168,85,247,.12)!important}
+.vinyl-disc{box-shadow:0 0 26px rgba(168,85,247,.2)!important}
+.bgm-btn.on{box-shadow:0 0 14px rgba(251,191,36,.5)!important;border-color:#fbbf24!important;color:#fbbf24!important}
 
 /* ============================================================
    响应式：手机端隐藏双侧音浪，简化网格与水印
