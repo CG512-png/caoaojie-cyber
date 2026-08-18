@@ -1,124 +1,23 @@
 /* =========================================================
-   PREMIUM VISUAL LAYER
-   保留原站全部 DOM / 内容 / 播放器 / 游戏 / 交互，仅提升视觉表现。
+   CINEMATIC VISUAL PASS · 电影机个人作品集
 ========================================================= */
-:root{
-  --bg:#07070d;
-  --purple:#a855f7;
-  --purple2:#6d3cff;
-  --pink:#ff2d95;
-  --gold:#f6c35b;
-  --green:#8df0c5;
-  --card:rgba(18,14,30,.68);
-  --card-hover:rgba(28,18,46,.84);
-  --border:rgba(177,126,255,.20);
-  --border-strong:rgba(177,126,255,.42);
-  --ink-soft:#b9aed0;
-}
+body{background:radial-gradient(ellipse at 50% 38%,rgba(40,34,64,.18),transparent 52%),linear-gradient(180deg,#030409 0%,#07070d 48%,#05050a 100%) !important}
+.bg-aurora{opacity:.38 !important;filter:blur(72px) saturate(.72) !important}
+.hero:after{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(ellipse at 50% 46%,transparent 35%,rgba(0,0,0,.22) 72%,rgba(0,0,0,.62) 100%),linear-gradient(180deg,rgba(0,0,0,.20),transparent 24%,transparent 72%,rgba(0,0,0,.45))}
+body:before{content:"";position:fixed;inset:0;z-index:9990;pointer-events:none;opacity:.038;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.38'/%3E%3C/svg%3E");mix-blend-mode:soft-light}
+body:after{opacity:.012 !important;background:linear-gradient(rgba(255,255,255,.6) 1px,transparent 1px) !important;background-size:100% 8px !important}
+.hero-left,.hero-right{filter:drop-shadow(0 18px 55px rgba(0,0,0,.28))}
+.hero-name{text-shadow:0 0 28px rgba(168,85,247,.25),0 0 100px rgba(168,85,247,.10) !important}
 
-html{scrollbar-color:rgba(168,85,247,.55) #07070d}
-body{background:#07070d}
-body:after{
-  content:"";position:fixed;inset:0;pointer-events:none;z-index:8;opacity:.045;
-  background:linear-gradient(rgba(255,255,255,.55) 1px,transparent 1px);
-  background-size:100% 5px;mix-blend-mode:screen;
-}
+/* 回马灯式：先略虚、略远，随后自然对焦 */
+.reveal{opacity:0 !important;transform:translate3d(0,22px,0) scale(.988) !important;filter:blur(6px) !important;transition:opacity .85s cubic-bezier(.16,1,.3,1),transform 1s cubic-bezier(.16,1,.3,1),filter 1s cubic-bezier(.16,1,.3,1) !important;will-change:opacity,transform,filter}
+.reveal.active{opacity:1 !important;transform:translate3d(0,0,0) scale(1) !important;filter:blur(0) !important}
+.reveal.delay-1{transition-delay:.08s !important}.reveal.delay-2{transition-delay:.16s !important}.reveal.delay-3{transition-delay:.24s !important}
 
-/* 更有层次的背景 */
-.bg-aurora{opacity:.72!important;filter:blur(55px)!important}
-.cyber-grid{opacity:.75;background-size:52px 52px,52px 52px,100% 100%!important}
-
-/* 导航：玻璃 + 细霓虹线 */
-#nav,nav{background:linear-gradient(180deg,rgba(7,7,13,.78),rgba(7,7,13,.38))!important}
-nav.scrolled{background:rgba(7,7,13,.82)!important;backdrop-filter:blur(22px)!important}
-nav:after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(168,85,247,.45),rgba(246,195,91,.32),transparent);opacity:.65}
-
-/* Hero 更浓、更有舞台感 */
-.hero:before{
-  content:"";position:absolute;inset:12% 4% 0;pointer-events:none;z-index:1;
-  background:radial-gradient(ellipse at 70% 48%,rgba(168,85,247,.16),transparent 34%),radial-gradient(ellipse at 28% 68%,rgba(255,45,149,.07),transparent 30%);
-  filter:blur(20px);
-}
-.hero-name{text-shadow:0 0 35px rgba(168,85,247,.42),0 0 90px rgba(168,85,247,.2),0 0 160px rgba(255,45,149,.12)!important}
-.hero-name .given{filter:drop-shadow(0 0 18px rgba(168,85,247,.22))}
-.hero-tag{background:rgba(22,14,38,.62)!important;border-color:rgba(168,85,247,.32)!important;box-shadow:inset 0 0 20px rgba(168,85,247,.035),0 8px 28px rgba(0,0,0,.22)}
-.hero-cta{background:linear-gradient(120deg,#7837db,#a855f7 52%,#f6c35b)!important;box-shadow:0 12px 38px rgba(168,85,247,.38),0 0 24px rgba(168,85,247,.2)!important}
-.hero-cta:hover{filter:saturate(1.15) brightness(1.08)}
-.avatar-ring{border-color:rgba(168,85,247,.52)!important;box-shadow:0 0 45px rgba(168,85,247,.25),inset 0 0 35px rgba(168,85,247,.12)!important}
-.avatar-ring.ring2{border-color:rgba(246,195,91,.3)!important}
-
-/* 所有主要卡片：更深、更饱满 */
-.ai-card,.work-music,.work-game,.cert-card,.edu-story,.radar-canvas-wrap,.cat-frame{
-  background:linear-gradient(145deg,rgba(27,17,45,.82),rgba(10,9,18,.72))!important;
-  border:1px solid rgba(168,85,247,.25)!important;
-  box-shadow:0 24px 70px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.06),inset 0 0 55px rgba(168,85,247,.045),0 0 28px rgba(168,85,247,.07)!important;
-}
-.ai-card:hover,.work-music:hover,.work-game:hover,.cert-card:hover{
-  border-color:rgba(168,85,247,.62)!important;
-  box-shadow:0 30px 85px rgba(0,0,0,.58),0 0 38px rgba(168,85,247,.24),inset 0 1px 0 rgba(255,255,255,.09)!important;
-}
-
-/* AI 卡片增加彩色边缘 */
-.ai-card:after,.work-music:after,.work-game:after{
-  content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
-  background:linear-gradient(120deg,rgba(168,85,247,.10),transparent 34%,transparent 68%,rgba(246,195,91,.07));
-  mix-blend-mode:screen;
-}
-
-/* 游戏作品：让“飞机大战”成为视觉重点 */
-.work-game{background:radial-gradient(circle at 80% 20%,rgba(168,85,247,.18),transparent 30%),linear-gradient(135deg,#0b0814,#1a0c2b 58%,#100914)!important}
-.work-game .game-preview{box-shadow:0 0 45px rgba(168,85,247,.18),inset 0 0 45px rgba(168,85,247,.08)}
-
-/* 音乐作品：更像唱片而不是普通卡片 */
-.work-music{background:radial-gradient(circle at 20% 20%,rgba(246,195,91,.10),transparent 30%),linear-gradient(135deg,#151021,#0b0911)!important}
-.vinyl-disc{box-shadow:0 0 30px rgba(168,85,247,.3),0 0 80px rgba(168,85,247,.1)!important}
-
-/* 时间线更有“轨道”感觉 */
-.timeline-line-fill{background:linear-gradient(180deg,#a855f7,#ff2d95 50%,#f6c35b)!important;box-shadow:0 0 14px rgba(168,85,247,.8),0 0 38px rgba(168,85,247,.28)!important}
-.tl-comet{background:#f6c35b!important;box-shadow:0 0 15px #f6c35b,0 0 38px rgba(246,195,91,.45)!important}
-.tl-card{background:linear-gradient(145deg,rgba(26,17,43,.84),rgba(9,9,16,.7))!important;border-color:rgba(168,85,247,.22)!important}
-
-/* 雷达 / 能力区 */
-.radar-canvas-wrap{box-shadow:0 0 45px rgba(168,85,247,.16),inset 0 0 60px rgba(168,85,247,.05)!important}
-.radar-legend-item{background:rgba(18,13,30,.72)!important;border-color:rgba(168,85,247,.22)!important}
-.radar-legend-fill{background:linear-gradient(90deg,#a855f7,#f6c35b)!important;box-shadow:0 0 10px rgba(168,85,247,.55)!important}
-
-/* 证书：不要压过作品，但保持精致 */
-.cert-card{background:rgba(16,12,25,.7)!important}
-.cert-card:hover{transform:translateY(-7px)!important}
-
-/* 标题与分隔线 */
-.section-title{text-shadow:0 0 18px rgba(168,85,247,.42),0 0 55px rgba(168,85,247,.12)!important}
-.section-subtitle{color:rgba(216,204,238,.62)!important}
-.section:before{content:"";position:absolute;top:0;left:50%;width:min(900px,72%);height:1px;transform:translateX(-50%);background:linear-gradient(90deg,transparent,rgba(168,85,247,.28),rgba(246,195,91,.2),transparent);opacity:.55}
-
-/* 小型 HUD 标签 */
-.label{background:rgba(168,85,247,.08)!important;border-color:rgba(168,85,247,.35)!important;box-shadow:0 0 18px rgba(168,85,247,.08)}
-
-/* 彩蛋式角标 */
-.cyber-watermark{color:rgba(168,85,247,.38)!important;text-shadow:0 0 12px rgba(168,85,247,.42)!important}
-.cyber-corners:before,.cyber-corners:after{border-color:#b67aff!important;filter:drop-shadow(0 0 8px rgba(168,85,247,.85))!important}
-
-/* 音乐按钮 / 播放状态 */
-.cyber-audio-btn{background:rgba(10,8,17,.78)!important;border-color:rgba(168,85,247,.48)!important;box-shadow:0 10px 30px rgba(0,0,0,.35)}
-.cyber-audio-btn.on{color:#f6c35b!important;border-color:#f6c35b!important;box-shadow:0 0 22px rgba(246,195,91,.35)!important}
-
-/* 手机端：保留内容密度，同时减少装饰 */
-@media(max-width:900px){
-  .wrap{padding-left:24px!important;padding-right:24px!important}
-  .section{padding-top:92px!important;padding-bottom:92px!important}
-  .hero-grid{gap:30px}
-  .hero-name{font-size:clamp(52px,16vw,88px)!important}
-  .cyber-grid{opacity:.42}
-}
-@media(max-width:600px){
-  body:after{opacity:.025}
-  .section:before{width:82%}
-  .hero:before{inset:12% 0 0}
-  .hero-cta{padding:13px 23px}
-}
-
-/* 动效偏好：尊重系统减少动画设置 */
-@media(prefers-reduced-motion:reduce){
-  *,*:before,*:after{animation-duration:.001ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.001ms!important}
-}
+/* 卡片像摄影机轻推，不再生硬跳动 */
+.ai-card,.work-music,.work-game,.cert-card,.edu-story,.cat-frame{transition:transform .7s cubic-bezier(.16,1,.3,1),border-color .5s ease,box-shadow .7s cubic-bezier(.16,1,.3,1),background .7s ease !important}
+.ai-card:hover,.work-music:hover,.work-game:hover,.cert-card:hover{transform:translateY(-5px) scale(1.008) !important}
+.avatar,.game-preview,.work-music img,.cat-frame img{transition:transform 1.2s cubic-bezier(.16,1,.3,1),filter 1s ease !important}
+.avatar:hover,.game-preview:hover,.work-music img:hover,.cat-frame img:hover{filter:saturate(1.04) contrast(1.02) brightness(1.02) !important}
+.section{scroll-margin-top:90px}
+@media(max-width:600px){body:before{opacity:.022}.reveal{filter:blur(4px) !important;transform:translate3d(0,15px,0) scale(.993) !important}.reveal.active{filter:blur(0) !important;transform:none !important}}
