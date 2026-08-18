@@ -45,7 +45,7 @@
   })();
 
   /* ==========================================================
-     2. 动态双侧背景音浪（左青蓝 / 右洋红，霓虹频谱柱）
+     2. 动态双侧背景音浪（左霓虹紫 / 右霓虹粉，频谱柱）
      ========================================================== */
   (function equalizer() {
     var L = doc.getElementById('eqL'), R = doc.getElementById('eqR');
@@ -87,8 +87,8 @@
       ctx.shadowBlur = 0;
     }
     function loop() {
-      draw(ctxL, heightsL, targetsL, 'rgba(0,243,255,.95)', 'rgba(0,243,255,.25)');
-      draw(ctxR, heightsR, targetsR, 'rgba(255,0,85,.95)', 'rgba(255,0,85,.25)');
+      draw(ctxL, heightsL, targetsL, 'rgba(168,85,247,.95)', 'rgba(168,85,247,.25)');
+      draw(ctxR, heightsR, targetsR, 'rgba(255,45,149,.95)', 'rgba(255,45,149,.25)');
       raf(loop);
     }
     var raf = win.requestAnimationFrame || function (f) { setTimeout(f, 33); };
@@ -150,8 +150,8 @@
         var alpha = 0.35 + 0.45 * Math.abs(Math.sin(s.tw));
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-        ctx.fillStyle = s.cyan ? 'rgba(0,243,255,' + alpha + ')' : 'rgba(255,255,255,' + (alpha * 0.7) + ')';
-        ctx.shadowBlur = 8; ctx.shadowColor = s.cyan ? 'rgba(0,243,255,.8)' : 'rgba(255,255,255,.4)';
+        ctx.fillStyle = s.cyan ? 'rgba(168,85,247,' + alpha + ')' : 'rgba(255,255,255,' + (alpha * 0.7) + ')';
+        ctx.shadowBlur = 8; ctx.shadowColor = s.cyan ? 'rgba(168,85,247,.8)' : 'rgba(255,255,255,.4)';
         ctx.fill();
       }
       ctx.shadowBlur = 0;
@@ -162,8 +162,8 @@
         var mt = meteors[m];
         mt.x += mt.vx; mt.y += mt.vy; mt.life--;
         var grad = ctx.createLinearGradient(mt.x, mt.y, mt.x - mt.vx * 9, mt.y - mt.vy * 9);
-        grad.addColorStop(0, 'rgba(0,243,255,.9)'); grad.addColorStop(1, 'rgba(0,243,255,0)');
-        ctx.strokeStyle = grad; ctx.lineWidth = 1.6; ctx.shadowBlur = 10; ctx.shadowColor = 'rgba(0,243,255,.9)';
+        grad.addColorStop(0, 'rgba(168,85,247,.9)'); grad.addColorStop(1, 'rgba(168,85,247,0)');
+        ctx.strokeStyle = grad; ctx.lineWidth = 1.6; ctx.shadowBlur = 10; ctx.shadowColor = 'rgba(168,85,247,.9)';
         ctx.beginPath();
         ctx.moveTo(mt.x, mt.y); ctx.lineTo(mt.x - mt.vx * 9, mt.y - mt.vy * 9);
         ctx.stroke();
